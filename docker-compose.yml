@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  bookstore-api:
+    build: ./
+    command: ./wait-for-postgres.sh bookstore-db ./build/api
+    ports:
+      - 8080:8080
+    depends_on:
+      - bookstore-db
+    environment:
+      - DB_PASSWORD=secret
+
+  bookstore-db:
+    restart: always
+    image: postgres:latest
+    container_name: bookstore-db
+    volumes:
+      - ./.database/postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=secret
+    ports:
+      - 5432:5432
+
