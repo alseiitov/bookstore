@@ -8,8 +8,8 @@ services:
       - 8080:8080
     depends_on:
       - bookstore-db
-    environment:
-      - DB_PASSWORD=secret
+    env_file: 
+      .env
 
   bookstore-db:
     restart: always

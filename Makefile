@@ -5,3 +5,7 @@ build:
 
 migrate:
 	migrate -path ./migrations -database 'postgres://postgres:secret@0.0.0.0:5432/postgres?sslmode=disable' up
+
+clean:
+	docker image rm -f bookstore_bookstore-api
+	sudo rm -rf .database 

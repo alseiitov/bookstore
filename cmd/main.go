@@ -1,28 +1,17 @@
 package main
 
 import (
-	"database/sql"
-	"fmt"
-	"log"
-	"net/http"
+	"flag"
 
-	_ "github.com/lib/pq"
+	"github.com/alseiitov/bookstore/internal/app"
+	"github.com/alseiitov/dotenv"
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(`{"name":"dossan"}`))
-	})
+	configPath := flag.String("config-path", "./configs/config.json", "Path to the config file")
+	flag.Parse()
 
-	db, err := sql.Open("postgres", "postgresql://postgres:secret@bookstore-db:5432?sslmode=disable")
-	if err != nil {
-		log.Fatal(err)
-	}
+	dotenv.Load()
 
-	err = db.Ping()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("ok")
-	http.ListenAndServe(":8080", nil)
+	app.Run(*configPath)
 }

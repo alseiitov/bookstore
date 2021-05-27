@@ -1,0 +1,10 @@
+{
+    "api": {
+        "port": 8080
+    },
+    "database": {
+        "user": "postgres",
+        "host": "bookstore-db",
+        "port": 5432
+    }
+}
