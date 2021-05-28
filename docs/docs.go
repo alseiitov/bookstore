@@ -49,7 +49,7 @@ var doc = `{
                     "default": {
                         "description": "",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/internal_handler.errorResponse"
                         }
                     }
                 }
@@ -72,7 +72,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github.com_alseiitov_bookstore_internal_handler.bookInput"
+                            "$ref": "#/definitions/internal_handler.bookInput"
                         }
                     }
                 ],
@@ -83,7 +83,7 @@ var doc = `{
                     "default": {
                         "description": "",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/internal_handler.errorResponse"
                         }
                     }
                 }
@@ -120,7 +120,7 @@ var doc = `{
                     "default": {
                         "description": "",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/internal_handler.errorResponse"
                         }
                     }
                 }
@@ -150,7 +150,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github.com_alseiitov_bookstore_internal_handler.bookInput"
+                            "$ref": "#/definitions/internal_handler.bookInput"
                         }
                     }
                 ],
@@ -161,7 +161,7 @@ var doc = `{
                     "default": {
                         "description": "",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/internal_handler.errorResponse"
                         }
                     }
                 }
@@ -193,7 +193,7 @@ var doc = `{
                     "default": {
                         "description": "",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/internal_handler.errorResponse"
                         }
                     }
                 }
@@ -216,6 +216,14 @@ var doc = `{
                 }
             }
         },
+        "github.com_alseiitov_bookstore_internal_handler.errorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
         "internal_handler.bookInput": {
             "type": "object",
             "required": [
@@ -227,6 +235,14 @@ var doc = `{
                     "type": "string"
                 },
                 "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal_handler.errorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
                     "type": "string"
                 }
             }

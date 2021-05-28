@@ -27,17 +27,29 @@ func (s *BookService) GetAll() ([]model.Book, error) {
 }
 
 func (s *BookService) GetByID(bookID int) (model.Book, error) {
-	return s.repo.GetByID(bookID)
+	book, err := s.repo.GetByID(bookID)
+
+	if err == repository.ErrBookNotFound {
+		return book, ErrBookNotFound
+	}
+
+	return book, err
 }
 
 func (s *BookService) Update(bookID int, name, author string) error {
-	return s.repo.Update(
+	err := s.repo.Update(
 		model.Book{
 			ID:     bookID,
 			Name:   name,
 			Author: author,
 		},
 	)
+
+	if err == repository.ErrBookNotFound {
+		return ErrBookNotFound
+	}
+
+	return err
 }
 
 func (s *BookService) Delete(bookID int) error {

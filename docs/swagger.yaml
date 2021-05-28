@@ -10,6 +10,11 @@ definitions:
     - author
     - name
     type: object
+  github.com_alseiitov_bookstore_internal_handler.errorResponse:
+    properties:
+      error:
+        type: string
+    type: object
   internal_handler.bookInput:
     properties:
       author:
@@ -19,6 +24,11 @@ definitions:
     required:
     - author
     - name
+    type: object
+  internal_handler.errorResponse:
+    properties:
+      error:
+        type: string
     type: object
   model.Book:
     properties:
@@ -52,7 +62,7 @@ paths:
         default:
           description: ""
           schema:
-            type: string
+            $ref: '#/definitions/internal_handler.errorResponse'
       summary: Get all books
       tags:
       - books
@@ -65,7 +75,7 @@ paths:
         name: input
         required: true
         schema:
-          $ref: '#/definitions/github.com_alseiitov_bookstore_internal_handler.bookInput'
+          $ref: '#/definitions/internal_handler.bookInput'
       produces:
       - application/json
       responses:
@@ -74,7 +84,7 @@ paths:
         default:
           description: ""
           schema:
-            type: string
+            $ref: '#/definitions/internal_handler.errorResponse'
       summary: Add book
       tags:
       - books
@@ -96,7 +106,7 @@ paths:
         default:
           description: ""
           schema:
-            type: string
+            $ref: '#/definitions/internal_handler.errorResponse'
       summary: Delete book
       tags:
       - books
@@ -119,7 +129,7 @@ paths:
         default:
           description: ""
           schema:
-            type: string
+            $ref: '#/definitions/internal_handler.errorResponse'
       summary: Get book
       tags:
       - books
@@ -137,7 +147,7 @@ paths:
         name: input
         required: true
         schema:
-          $ref: '#/definitions/github.com_alseiitov_bookstore_internal_handler.bookInput'
+          $ref: '#/definitions/internal_handler.bookInput'
       produces:
       - application/json
       responses:
@@ -146,7 +156,7 @@ paths:
         default:
           description: ""
           schema:
-            type: string
+            $ref: '#/definitions/internal_handler.errorResponse'
       summary: Update book
       tags:
       - books

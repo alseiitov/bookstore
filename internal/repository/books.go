@@ -30,6 +30,7 @@ func (r *BooksRepo) GetAll() ([]model.Book, error) {
 
 	for rows.Next() {
 		var book model.Book
+
 		err = rows.Scan(&book.ID, &book.Name, &book.Author)
 		if err != nil {
 			return nil, err
@@ -49,14 +50,28 @@ func (r *BooksRepo) GetByID(bookID int) (model.Book, error) {
 		&book.ID, &book.Name, &book.Author,
 	)
 
+	if err == sql.ErrNoRows {
+		return book, ErrBookNotFound
+	}
+
 	return book, err
 }
 
 func (r *BooksRepo) Update(book model.Book) error {
-	_, err := r.db.Exec(
+	res, err := r.db.Exec(
 		`UPDATE books SET name = $1, author = $2 WHERE id = $3`,
 		book.Name, book.Author, book.ID,
 	)
+
+	if err != nil {
+		return err
+	}
+
+	n, err := res.RowsAffected()
+
+	if n == 0 {
+		return ErrBookNotFound
+	}
 
 	return err
 }
