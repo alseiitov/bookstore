@@ -9,3 +9,6 @@ migrate:
 clean:
 	docker image rm -f bookstore_bookstore-api
 	sudo rm -rf .database 
+
+swagger:
+	swag init --parseDependency -g internal/app/app.go 

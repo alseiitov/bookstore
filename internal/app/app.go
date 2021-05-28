@@ -16,6 +16,13 @@ import (
 	"github.com/alseiitov/bookstore/pkg/database"
 )
 
+// @title Bookstore API
+// @version 1.0
+// @description API Server for bookstore
+
+// @host localhost:8080
+// @BasePath /api
+
 func Run(configPath string) {
 	cfg, err := config.NewConfig(configPath)
 	if err != nil {

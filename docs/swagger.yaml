@@ -1,0 +1,153 @@
+basePath: /api
+definitions:
+  github.com_alseiitov_bookstore_internal_handler.bookInput:
+    properties:
+      author:
+        type: string
+      name:
+        type: string
+    required:
+    - author
+    - name
+    type: object
+  internal_handler.bookInput:
+    properties:
+      author:
+        type: string
+      name:
+        type: string
+    required:
+    - author
+    - name
+    type: object
+  model.Book:
+    properties:
+      author:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API Server for bookstore
+  title: Bookstore API
+  version: "1.0"
+paths:
+  /books:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Book'
+            type: array
+        default:
+          description: ""
+          schema:
+            type: string
+      summary: Get all books
+      tags:
+      - books
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: book info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/github.com_alseiitov_bookstore_internal_handler.bookInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: ok
+        default:
+          description: ""
+          schema:
+            type: string
+      summary: Add book
+      tags:
+      - books
+  /books/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID of book
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: ok
+        default:
+          description: ""
+          schema:
+            type: string
+      summary: Delete book
+      tags:
+      - books
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID of book
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Book'
+        default:
+          description: ""
+          schema:
+            type: string
+      summary: Get book
+      tags:
+      - books
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID of book
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: book info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/github.com_alseiitov_bookstore_internal_handler.bookInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+        default:
+          description: ""
+          schema:
+            type: string
+      summary: Update book
+      tags:
+      - books
+swagger: "2.0"

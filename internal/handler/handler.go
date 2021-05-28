@@ -1,8 +1,12 @@
 package handler
 
 import (
+	_ "github.com/alseiitov/bookstore/docs"
 	"github.com/alseiitov/bookstore/internal/service"
 	"github.com/gin-gonic/gin"
+
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type Handler struct {
@@ -25,6 +29,9 @@ func (h *Handler) Init() *gin.Engine {
 		api.PUT("/books/:id", h.UpdateBook)
 		api.DELETE("/books/:id", h.DeleteBook)
 	}
+
+	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
 	return router
 }
